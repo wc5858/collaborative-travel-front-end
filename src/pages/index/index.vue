@@ -1,47 +1,19 @@
 <template>
   <div class="page">
-    <i-tabs v-bind:current="current" color="#73116f" @change="handleChange">
-      <i-tab key="tab1" title="关注"></i-tab>
-      <i-tab key="tab2" title="新回答"></i-tab>
-      <i-tab key="tab3" title="新问题"></i-tab>
-    </i-tabs>
-    <ul v-if="current=='tab1'">
-      <li class="list" v-for="(item, itemIndex) in cards" v-bind:key="itemIndex" @click="goAnswer(item.aid)">
+    <ul>
+      <li class="list" v-for="(item, itemIndex) in cards" v-bind:key="itemIndex" @click="goTravel(item.aid)">
         <i-card
           full="true"
-          v-bind:title="item.user.name"
-          v-bind:thumb="item.user.pictureurl"
+          v-bind:title="item.title"
+          v-bind:thumb="item.thumb"
+          v-bind:extra="item.status"
         >
-          <view slot="content">{{'回答了：' +item.question.title}}</view>
+          <view slot="content">{{'发起人：' +item.user}}</view>
           <view slot="footer">{{item.content}}</view>
         </i-card>
       </li>
     </ul>
-    <ul v-if="current=='tab2'">
-      <li class="list" v-for="(item, itemIndex) in cards2" v-bind:key="itemIndex" @click="goAnswer(item.aid)">
-        <i-card
-          full="true"
-          v-bind:title="item.user.name"
-          v-bind:thumb="item.user.pictureurl"
-        >
-          <view slot="content">{{'回答了：' +item.question.title}}</view>
-          <view slot="footer">{{item.content}}</view>
-        </i-card>
-      </li>
-    </ul>
-    <ul v-if="current=='tab3'">
-      <li class="list" v-for="(item, itemIndex) in cards3" v-bind:key="itemIndex" @click="goQuestion(item.qid)">
-        <i-card
-          full="true"
-          v-bind:title="item.user.name"
-          v-bind:thumb="item.user.pictureurl"
-        >
-          <view slot="content">{{'提问了：' +item.title}}</view>
-          <view slot="footer">{{item.content}}</view>
-        </i-card>
-      </li>
-    </ul>
-    <div class="add" @click="newQuestion">
+    <div class="add" @click="newTravel">
       <i-icon type="add" size="45" color="#fff" />
     </div>
   </div>
@@ -51,41 +23,31 @@
 export default {
   data() {
     return {
-      cards: [],
-      cards2: [],
-      cards3: [],
-      current: 'tab1'
+      cards: [{
+        title: "标题",
+        thumb:"https://i.loli.net/2017/08/21/599a521472424.jpg",
+        user:"xxx",
+        content: "xxx",
+        id: 1,
+        status: "进行中"
+      }]
     };
   },
 
   methods: {
-    handleChange(e) {
-      this.current = e.target.key
-    },
     load(uid) {
-      this.$callApi("GET",'answer/' + uid +'/getFollowUserAnswer').then(res=>{
-        this.cards=res
-      })
-      this.$callApi("GET",'/answer/0/getRecentAnswer').then(res=>{
-        this.cards2=res
-      })
-      this.$callApi("GET",'/question/0/getRecentQuestion').then(res=>{
-        this.cards3=res
+      // this.$callApi("GET",'answer/' + uid +'/getFollowUserAnswer').then(res=>{
+      //   this.cards=res
+      // })
+    },
+    goTravel(i){
+      wx.navigateTo({
+        url: '/pages/travel/main?tid=' + i
       })
     },
-    goAnswer(i){
+    newTravel() {
       wx.navigateTo({
-        url: '/pages/ans/main?aid=' + i
-      })
-    },
-    goQuestion(i){
-      wx.navigateTo({
-        url: '/pages/que/main?qid=' + i
-      })
-    },
-    newQuestion() {
-      wx.navigateTo({
-        url: '/pages/newq/main'
+        url: '/pages/newtravel/main'
       })
     },
     login() {
