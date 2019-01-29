@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "关注的用户",
+  "usingComponents": {
+      "i-card": "/static/iview/card/index",
+      "i-switch": "/static/iview/switch/index"
+  }
+}

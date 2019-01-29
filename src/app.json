@@ -1,13 +1,43 @@
 {
   "pages": [
     "pages/index/main",
-    "pages/logs/main",
-    "pages/counter/main"
+    "pages/mine/main",
+    "pages/act/main",
+    "pages/fou/main",
+    "pages/foq/main",
+    "pages/myq/main",
+    "pages/mya/main",
+    "pages/newq/main",
+    "pages/newa/main",
+    "pages/newc/main",
+    "pages/ans/main",
+    "pages/que/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#666",
+    "selectedColor": "#73116f",
+    "backgroundColor": "#fff",
+    "list": [{
+      "pagePath": "pages/index/main",
+      "iconPath": "/static/imgs/barrage.png",
+      "selectedIconPath": "/static/imgs/barrage_fill.png",
+      "text": "首页"
+    },{
+      "pagePath": "pages/act/main",
+      "iconPath": "/static/imgs/interactive.png",
+      "selectedIconPath": "/static/imgs/interactive_fill.png",
+      "text": "动态"
+    }, {
+      "pagePath": "pages/mine/main",
+      "iconPath": "/static/imgs/mine.png",
+      "selectedIconPath": "/static/imgs/mine_fill.png",
+      "text": "我的"
+    }]
   }
 }

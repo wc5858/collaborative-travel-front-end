@@ -1,105 +1,165 @@
 <template>
-  <div class="container" @click="clickHandle('test click', $event)">
-
-    <div class="userinfo" @click="bindViewTap">
-      <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
-      <div class="userinfo-nickname">
-        <card :text="userInfo.nickName"></card>
-      </div>
+  <div class="page">
+    <i-tabs v-bind:current="current" color="#73116f" @change="handleChange">
+      <i-tab key="tab1" title="关注"></i-tab>
+      <i-tab key="tab2" title="新回答"></i-tab>
+      <i-tab key="tab3" title="新问题"></i-tab>
+    </i-tabs>
+    <ul v-if="current=='tab1'">
+      <li class="list" v-for="(item, itemIndex) in cards" v-bind:key="itemIndex" @click="goAnswer(item.aid)">
+        <i-card
+          full="true"
+          v-bind:title="item.user.name"
+          v-bind:thumb="item.user.pictureurl"
+        >
+          <view slot="content">{{'回答了：' +item.question.title}}</view>
+          <view slot="footer">{{item.content}}</view>
+        </i-card>
+      </li>
+    </ul>
+    <ul v-if="current=='tab2'">
+      <li class="list" v-for="(item, itemIndex) in cards2" v-bind:key="itemIndex" @click="goAnswer(item.aid)">
+        <i-card
+          full="true"
+          v-bind:title="item.user.name"
+          v-bind:thumb="item.user.pictureurl"
+        >
+          <view slot="content">{{'回答了：' +item.question.title}}</view>
+          <view slot="footer">{{item.content}}</view>
+        </i-card>
+      </li>
+    </ul>
+    <ul v-if="current=='tab3'">
+      <li class="list" v-for="(item, itemIndex) in cards3" v-bind:key="itemIndex" @click="goQuestion(item.qid)">
+        <i-card
+          full="true"
+          v-bind:title="item.user.name"
+          v-bind:thumb="item.user.pictureurl"
+        >
+          <view slot="content">{{'提问了：' +item.title}}</view>
+          <view slot="footer">{{item.content}}</view>
+        </i-card>
+      </li>
+    </ul>
+    <div class="add" @click="newQuestion">
+      <i-icon type="add" size="45" color="#fff" />
     </div>
-
-    <div class="usermotto">
-      <div class="user-motto">
-        <card :text="motto"></card>
-      </div>
-    </div>
-
-    <form class="form-container">
-      <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
-      <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
-    </form>
-    <a href="/pages/counter/main" class="counter">去往Vuex示例页面</a>
   </div>
 </template>
 
 <script>
-import card from '@/components/card'
-
 export default {
-  data () {
+  data() {
     return {
-      motto: 'Hello World',
-      userInfo: {}
-    }
-  },
-
-  components: {
-    card
+      cards: [],
+      cards2: [],
+      cards3: [],
+      current: 'tab1'
+    };
   },
 
   methods: {
-    bindViewTap () {
-      const url = '../logs/main'
-      wx.navigateTo({ url })
+    handleChange(e) {
+      this.current = e.target.key
     },
-    getUserInfo () {
-      // 调用登录接口
-      wx.login({
-        success: () => {
-          wx.getUserInfo({
-            success: (res) => {
-              this.userInfo = res.userInfo
-            }
-          })
-        }
+    load(uid) {
+      this.$callApi("GET",'answer/' + uid +'/getFollowUserAnswer').then(res=>{
+        this.cards=res
+      })
+      this.$callApi("GET",'/answer/0/getRecentAnswer').then(res=>{
+        this.cards2=res
+      })
+      this.$callApi("GET",'/question/0/getRecentQuestion').then(res=>{
+        this.cards3=res
       })
     },
-    clickHandle (msg, ev) {
-      console.log('clickHandle:', msg, ev)
+    goAnswer(i){
+      wx.navigateTo({
+        url: '/pages/ans/main?aid=' + i
+      })
+    },
+    goQuestion(i){
+      wx.navigateTo({
+        url: '/pages/que/main?qid=' + i
+      })
+    },
+    newQuestion() {
+      wx.navigateTo({
+        url: '/pages/newq/main'
+      })
+    },
+    login() {
+      wx.getStorage({
+        key: "info",
+        success:res=> {
+          console.log(res.data)
+          this.load(res.data.uid)
+        },
+        fail:()=> {
+          // 调用登录接口
+          wx.login({
+            success: res => {
+              if (res.code) {
+                this
+                  .$callApi("POST", "user/login", {
+                    code: res.code
+                  })
+                  .then(res => {
+                    this.load(res.uid)
+                    wx.setStorage({
+                      key: 'info',
+                      data: {
+                        openid: res.openid,
+                        uid: res.uid
+                      }
+                    })
+                  })
+                  .catch(res => {
+                    console.log(res);
+                  });
+              } else {
+                console.log("登录失败！" + res.errMsg)
+              }
+            }
+          });
+        }
+      });
     }
   },
-
-  created () {
-    // 调用应用实例的方法获取全局数据
-    this.getUserInfo()
+  onLoad() {
+    let uid = wx.getStorageSync('info').uid
+    if(uid) {
+      this.load(uid)
+    }
+  },
+  created() {
+    this.login();
   }
-}
+};
 </script>
 
 <style scoped>
-.userinfo {
+.page {
+  background: #f3f3f3;
+  min-height: 100vh;
+}
+ul {
+  overflow: hidden;
+}
+.list {
+  margin: 20rpx 0;
+}
+.add {
+  position: fixed;
+  bottom: 40rpx;
+  right: 40rpx;
+  height: 140rpx;
+  width: 140rpx;
+  border-radius: 100%;
+  box-shadow: 0 10rpx 30rpx 6rpx #999;
+  background: #73116f;
   display: flex;
-  flex-direction: column;
   align-items: center;
-}
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 150px;
-}
-
-.form-control {
-  display: block;
-  padding: 0 12px;
-  margin-bottom: 5px;
-  border: 1px solid #ccc;
-}
-
-.counter {
-  display: inline-block;
-  margin: 10px auto;
-  padding: 5px 10px;
-  color: blue;
-  border: 1px solid blue;
+  justify-content: center;
 }
 </style>
