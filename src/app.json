@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/main",
+    "pages/travel/main",
     "pages/mine/main",
     "pages/act/main",
     "pages/fou/main",
@@ -10,8 +11,7 @@
     "pages/newq/main",
     "pages/newa/main",
     "pages/newc/main",
-    "pages/ans/main",
-    "pages/que/main"
+    "pages/ans/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
