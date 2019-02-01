@@ -20,15 +20,27 @@
           <view slot="content">{{item.content}}</view>
         </i-card>
       </li>
-    </ul> -->
+    </ul>-->
     <div v-if="show">
       <i-button type="info" @click="modifyTravel">编辑出游</i-button>
     </div>
     <div v-if="show">
-      <i-button type="info">加入出游</i-button>
+      <i-button type="info">发起投票</i-button>
+    </div>
+    <div v-if="show">
+      <i-button type="info">发起投票</i-button>
+    </div>
+    <div v-if="!added">
+      <i-button type="info" @click="addTravel">加入出游</i-button>
+    </div>
+    <div style="text-align:center" v-else>
+      已加入
+    </div>
+    <div>
+      <i-button type="info" @click="setReminder">设置提醒</i-button>
     </div>
     <button class="share" open-type="share">
-      <i-icon type="share" size="45" color="#fff" />
+      <i-icon type="share" size="45" color="#fff"/>
     </button>
   </div>
 </template>
@@ -47,25 +59,29 @@ export default {
       },
       cards: [],
       on: true,
-      item: {
-      }
+      item: {},
+      added: false
     };
   },
   onShareAppMessage(res) {
-    if (res.from === 'button') {
+    if (res.from === "button") {
       // 来自页面内转发按钮
-      console.log(res.target)
+      console.log(res.target);
     }
     return {
-      title: this.item.title + ',快来加入吧',
-      path: '/page/travel?tid=' + this.tid
-    }
+      title: (this.item.title || "我发起了出游活动") + ",快来加入吧",
+      path: "/page/travel?tid=" + this.tid
+    };
   },
   onLoad(options) {
     this.tid = options.tid;
   },
   onShow() {
-    this.item = wx.getStorageSync('travels')[this.tid]
+    this.item = wx.getStorageSync("travels")[this.tid];
+    let adds = wx.getStorageSync("adds");
+    if(adds.includes(this.tid)) {
+      this.added = true
+    }
     // let uid = wx.getStorageSync('info').uid
     // this.$callApi("GET", 'user/' + uid + '/' + this.tid + '/checkFollowQuestion').then(res => {
     //   this.state = res.state != 0
@@ -95,10 +111,31 @@ export default {
     // focusUser(){
 
     // },
+    addTravel(){
+      this.added = true
+      let adds = wx.getStorageSync("adds")||[];
+      adds.push(this.tid)
+      wx.setStorage({
+        key: 'adds',
+        data: adds
+      })
+      wx.showToast({
+        title: '成功',
+        icon: 'success',
+        duration: 2000
+      })
+    },
+    setReminder(){
+      wx.showToast({
+        title: '成功',
+        icon: 'success',
+        duration: 2000
+      })
+    },
     modifyTravel() {
       wx.navigateTo({
-        url: '/pages/newtravel/main?tid=' + this.tid
-      })
+        url: "/pages/newtravel/main?tid=" + this.tid
+      });
     }
   }
 };
