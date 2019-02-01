@@ -1,15 +1,15 @@
 <template>
   <div class="page">
     <ul>
-      <li class="list" v-for="(item, itemIndex) in cards" v-bind:key="itemIndex" @click="goTravel(item.aid)">
+      <li class="list" v-for="(item, itemIndex) in cards" v-bind:key="itemIndex" @click="goTravel(item.id)">
         <i-card
           full="true"
           v-bind:title="item.title"
-          v-bind:thumb="item.thumb"
-          v-bind:extra="item.status"
+          v-bind:thumb="item.avatar"
+          v-bind:extra="item.status || '进行中'"
         >
-          <view slot="content">{{'发起人：' +item.user}}</view>
-          <view slot="footer">{{item.content}}</view>
+          <view slot="content">{{'发起人：' +item.uname}}</view>
+          <view slot="footer">{{item.qnamedsc}}</view>
         </i-card>
       </li>
     </ul>
@@ -23,19 +23,16 @@
 export default {
   data() {
     return {
-      cards: [{
-        title: "标题",
-        thumb:"https://i.loli.net/2017/08/21/599a521472424.jpg",
-        user:"xxx",
-        content: "xxx",
-        id: 1,
-        status: "进行中"
-      }]
+      uid: 0,
+      cards: []
     };
   },
 
   methods: {
-    load(uid) {
+    load() {
+      let uid = this.uid
+      // 取假数据
+      this.cards = wx.getStorageSync('travels') || []
       // this.$callApi("GET",'answer/' + uid +'/getFollowUserAnswer').then(res=>{
       //   this.cards=res
       // })
@@ -91,8 +88,12 @@ export default {
   onLoad() {
     let uid = wx.getStorageSync('info').uid
     if(uid) {
-      this.load(uid)
+      this.uid = uid
+      this.load()
     }
+  },
+  onShow() {
+    this.load()
   },
   created() {
     this.login();

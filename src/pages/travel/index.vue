@@ -3,11 +3,11 @@
     <i-card
       full="true"
       v-bind:title="item.title"
-      v-bind:thumb="item.thumb"
-      v-bind:extra="item.status"
+      v-bind:thumb="item.avatar"
+      v-bind:extra="item.status || '进行中'"
     >
-      <view slot="content">{{'发起人：' +item.user}}</view>
-      <view slot="footer">{{item.content}}</view>
+      <view slot="content">{{'发起人：' +item.uname}}</view>
+      <view slot="footer">{{item.qnamedsc}}</view>
     </i-card>
     <!-- <view style="text-align:center;color:#666;">{{on?"进行中":"已结束"}}</view> -->
     <!-- <ul>
@@ -21,6 +21,9 @@
         </i-card>
       </li>
     </ul> -->
+    <div v-if="show">
+      <i-button type="info" @click="modifyTravel">编辑出游</i-button>
+    </div>
     <div v-if="show">
       <i-button type="info">加入出游</i-button>
     </div>
@@ -45,12 +48,6 @@ export default {
       cards: [],
       on: true,
       item: {
-        title: "标题",
-        thumb:"https://i.loli.net/2017/08/21/599a521472424.jpg",
-        user:"xxx",
-        content: "xxx",
-        id: 1,
-        status: "进行中"
       }
     };
   },
@@ -60,14 +57,15 @@ export default {
       console.log(res.target)
     }
     return {
-      title: '自定义转发标题',
-      // path: '/page/user?id=123'
+      title: this.item.title + ',快来加入吧',
+      path: '/page/travel?tid=' + this.tid
     }
   },
   onLoad(options) {
     this.tid = options.tid;
   },
   onShow() {
+    this.item = wx.getStorageSync('travels')[this.tid]
     // let uid = wx.getStorageSync('info').uid
     // this.$callApi("GET", 'user/' + uid + '/' + this.tid + '/checkFollowQuestion').then(res => {
     //   this.state = res.state != 0
@@ -97,6 +95,11 @@ export default {
     // focusUser(){
 
     // },
+    modifyTravel() {
+      wx.navigateTo({
+        url: '/pages/newtravel/main?tid=' + this.tid
+      })
+    }
   }
 };
 </script>

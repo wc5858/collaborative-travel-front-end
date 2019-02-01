@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "创建问题",
+  "navigationBarTitleText": "发布出游",
   "usingComponents": {
       "i-button": "/static/iview/button/index",
       "i-input": "/static/iview/input/index",

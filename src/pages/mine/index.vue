@@ -12,14 +12,14 @@
         <i-button open-type="getUserInfo" @getuserinfo="onGotUserInfo" type="info">点击登陆</i-button>
       </div>
       <div class="mine-info" v-else>
-        <i-panel>
+        <!-- <i-panel>
           <i-cell-group>
             <i-cell title="我关注的用户" is-link url="/pages/fou/main"></i-cell>
             <i-cell title="我关注的问题" is-link url="/pages/foq/main"></i-cell>
             <i-cell title="我的问题" is-link url="/pages/myq/main"></i-cell>
             <i-cell title="我的回答" is-link url="/pages/mya/main"></i-cell>
           </i-cell-group>
-        </i-panel>
+        </i-panel> -->
       </div>
     </div>
   </div>
