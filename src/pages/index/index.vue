@@ -4,7 +4,7 @@
       <li class="list" v-for="(item, itemIndex) in cards" v-bind:key="itemIndex" @click="goTravel(item.id)">
         <i-card
           full="true"
-          v-bind:title="item.title"
+          v-bind:title="item.qname"
           v-bind:thumb="item.avatar"
           v-bind:extra="item.status || '进行中'"
         >

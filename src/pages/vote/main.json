@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "参与投票",
+  "usingComponents": {
+      "i-button": "/static/iview/button/index",
+      "i-input": "/static/iview/input/index",
+      "i-panel": "/static/iview/panel/index",
+      "i-checkbox-group": "/static/iview/checkbox-group/index",
+      "i-checkbox": "/static/iview/checkbox/index"
+  }
+}

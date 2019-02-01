@@ -2,7 +2,7 @@
   <div class="page">
     <i-card
       full="true"
-      v-bind:title="item.title"
+      v-bind:title="item.qname"
       v-bind:thumb="item.avatar"
       v-bind:extra="item.status || '进行中'"
     >
@@ -24,11 +24,11 @@
     <div v-if="show">
       <i-button type="info" @click="modifyTravel">编辑出游</i-button>
     </div>
-    <div v-if="show">
-      <i-button type="info">发起投票</i-button>
+    <div v-if="!item.hasVote">
+      <i-button type="info" @click="newvote">发起投票</i-button>
     </div>
-    <div v-if="show">
-      <i-button type="info">发起投票</i-button>
+    <div v-else>
+      <i-button type="info" @click="vote">参与投票</i-button>
     </div>
     <div v-if="!added">
       <i-button type="info" @click="addTravel">加入出游</i-button>
@@ -135,6 +135,16 @@ export default {
     modifyTravel() {
       wx.navigateTo({
         url: "/pages/newtravel/main?tid=" + this.tid
+      });
+    },
+    newvote() {
+      wx.navigateTo({
+        url: "/pages/newvote/main?tid=" + this.tid
+      });
+    },
+    vote() {
+      wx.navigateTo({
+        url: "/pages/vote/main?tid=" + this.tid
       });
     }
   }

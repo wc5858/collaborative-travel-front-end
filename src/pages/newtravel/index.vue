@@ -1,10 +1,10 @@
 <template>
   <div class="page">
     <i-panel title="标题">
-      <i-input placeholder="请输入标题" @change="nameChange"/>
+      <i-input placeholder="请输入标题" @change="nameChange"  type="textarea" v-bind:value="qname"/>
     </i-panel>
     <i-panel title="出游描述">
-      <i-input value="\n\n\n" placeholder="请输入出游描述" type="textarea" @change="dscChange"/>
+      <i-input v-bind:value="qnamedsc" placeholder="请输入出游描述" type="textarea" @change="dscChange"/>
     </i-panel>
     <i-button type="info" @click="submit">{{type?'修改出游':'发布出游'}}</i-button>
   </div>
@@ -86,6 +86,9 @@ export default {
     if(options.tid) {
       this.tid = options.tid
       this.type = true
+      const travel = wx.getStorageSync('travels')[options.tid]
+      this.qname = travel.qname
+      this.qnamedsc = travel.qnamedsc
     }
   }
 };
