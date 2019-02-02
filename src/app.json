@@ -4,8 +4,11 @@
     "pages/travel/main",
     "pages/mine/main",
     "pages/newtravel/main",
+    "pages/newpreparation/main",
+    "pages/preparation/main",
     "pages/newvote/main",
     "pages/vote/main",
+
     "pages/act/main",
     "pages/fou/main",
     "pages/foq/main",

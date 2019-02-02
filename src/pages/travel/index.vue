@@ -39,6 +39,12 @@
     <div>
       <i-button type="info" @click="setReminder">设置提醒</i-button>
     </div>
+    <div v-if="!item.hasPreparation">
+      <i-button type="info" @click="addPreparation">添加准备</i-button>
+    </div>
+    <div v-else>
+      <i-button type="info" @click="goPreparation">查看准备</i-button>
+    </div>
     <button class="share" open-type="share">
       <i-icon type="share" size="45" color="#fff"/>
     </button>
@@ -95,16 +101,16 @@ export default {
     // })
   },
   methods: {
-    // goAnswer(i) {
-    //   wx.navigateTo({
-    //     url: '/pages/ans/main?aid=' + this.cards[i].aid
-    //   })
-    // },
+    goPreparation() {
+      wx.navigateTo({
+        url: '/pages/preparation/main?tid=' + this.tid
+      })
+    },
     // onChange() {
     //   this.$callApi("GET", 'user/' + wx.getStorageSync('info').uid + '/' + this.tid + (this.state ? '/removeFollowQuestion' : '/addFollowQuestion')).then(res => {
     //     console.log('操作成功')
     //     this.state = !this.state
-    //   }).catch(e => {
+    //   }).catch(e => {}
     //     console.log(e)
     //   })
     // },
@@ -140,6 +146,11 @@ export default {
     newvote() {
       wx.navigateTo({
         url: "/pages/newvote/main?tid=" + this.tid
+      });
+    },
+    addPreparation() {
+      wx.navigateTo({
+        url: "/pages/newpreparation/main?tid=" + this.tid
       });
     },
     vote() {
