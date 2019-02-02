@@ -45,7 +45,10 @@
     <div v-else>
       <i-button type="info" @click="goPreparation">查看准备</i-button>
     </div>
-    <button class="share" open-type="share">
+    <div>
+      <i-button type="info" @click="goMap">查看位置</i-button>
+    </div>
+    <button class="share" open-type="share" id="share">
       <i-icon type="share" size="45" color="#fff"/>
     </button>
   </div>
@@ -70,14 +73,14 @@ export default {
     };
   },
   onShareAppMessage(res) {
-    if (res.from === "button") {
-      // 来自页面内转发按钮
-      console.log(res.target);
+    if (res.from === "button" && res.target.id === "share") {
+      // 转发travel
+      return {
+        title: (this.item.title || "我发起了出游活动") + ",快来加入吧",
+        path: "/page/travel?tid=" + this.tid
+      }
     }
-    return {
-      title: (this.item.title || "我发起了出游活动") + ",快来加入吧",
-      path: "/page/travel?tid=" + this.tid
-    };
+    
   },
   onLoad(options) {
     this.tid = options.tid;
@@ -104,6 +107,11 @@ export default {
     goPreparation() {
       wx.navigateTo({
         url: '/pages/preparation/main?tid=' + this.tid
+      })
+    },
+    goMap() {
+      wx.navigateTo({
+        url: '/pages/map/main?tid=' + this.tid
       })
     },
     // onChange() {

@@ -8,6 +8,7 @@
     "pages/preparation/main",
     "pages/newvote/main",
     "pages/vote/main",
+    "pages/map/main",
 
     "pages/act/main",
     "pages/fou/main",
@@ -18,6 +19,11 @@
     "pages/newc/main",
     "pages/ans/main"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取位置信息并分享"
+    }
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
