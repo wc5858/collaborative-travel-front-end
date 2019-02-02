@@ -11,6 +11,7 @@
     "pages/map/main",
     "pages/fee/main",
     "pages/mood/main",
+    "pages/report/main",
 
     "pages/act/main"
   ],
