@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "添加回答",
-  "usingComponents": {
-      "i-button": "/static/iview/button/index",
-      "i-input": "/static/iview/input/index",
-      "i-checkbox": "/static/iview/checkbox/index",
-      "i-panel": "/static/iview/panel/index"
-  }
-}

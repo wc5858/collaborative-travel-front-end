@@ -48,6 +48,9 @@
     <div>
       <i-button type="info" @click="goMap">查看位置</i-button>
     </div>
+    <div>
+      <i-button type="info" @click="goFee">查看花费</i-button>
+    </div>
     <button class="share" open-type="share" id="share">
       <i-icon type="share" size="45" color="#fff"/>
     </button>
@@ -112,6 +115,11 @@ export default {
     goMap() {
       wx.navigateTo({
         url: '/pages/map/main?tid=' + this.tid
+      })
+    },
+    goFee() {
+      wx.navigateTo({
+        url: '/pages/fee/main?tid=' + this.tid
       })
     },
     // onChange() {

@@ -9,15 +9,9 @@
     "pages/newvote/main",
     "pages/vote/main",
     "pages/map/main",
+    "pages/fee/main",
 
-    "pages/act/main",
-    "pages/fou/main",
-    "pages/foq/main",
-    "pages/myq/main",
-    "pages/mya/main",
-    "pages/newa/main",
-    "pages/newc/main",
-    "pages/ans/main"
+    "pages/act/main"
   ],
   "permission": {
     "scope.userLocation": {
