@@ -51,6 +51,9 @@
     <div>
       <i-button type="info" @click="goFee">查看花费</i-button>
     </div>
+    <div>
+      <i-button type="info" @click="goMood">查看心情</i-button>
+    </div>
     <button class="share" open-type="share" id="share">
       <i-icon type="share" size="45" color="#fff"/>
     </button>
@@ -120,6 +123,11 @@ export default {
     goFee() {
       wx.navigateTo({
         url: '/pages/fee/main?tid=' + this.tid
+      })
+    },
+    goMood() {
+      wx.navigateTo({
+        url: '/pages/mood/main?tid=' + this.tid
       })
     },
     // onChange() {

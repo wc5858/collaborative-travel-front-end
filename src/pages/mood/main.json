@@ -1,6 +1,7 @@
 {
-  "navigationBarTitleText": "费用详情",
+  "navigationBarTitleText": "我的心情",
   "usingComponents": {
+      "i-icon": "/static/iview/icon/index",
       "i-button": "/static/iview/button/index",
       "i-input": "/static/iview/input/index",
       "i-panel": "/static/iview/panel/index"

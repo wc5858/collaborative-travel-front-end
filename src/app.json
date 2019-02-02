@@ -10,6 +10,7 @@
     "pages/vote/main",
     "pages/map/main",
     "pages/fee/main",
+    "pages/mood/main",
 
     "pages/act/main"
   ],
