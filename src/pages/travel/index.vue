@@ -86,7 +86,7 @@ export default {
       // 转发travel
       return {
         title: (this.item.title || "我发起了出游活动") + ",快来加入吧",
-        path: "/page/travel?tid=" + this.tid
+        path: "/pages/travel/main?tid=" + this.tid
       }
     }
     

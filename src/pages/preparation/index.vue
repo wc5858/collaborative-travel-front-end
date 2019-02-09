@@ -24,7 +24,7 @@ export default {
   onShareAppMessage(res) {
     return {
       title: '活动' +this.item.qname+'的准备详情' + ",快来看看吧",
-      path: "/page/preparation?tid=" + this.tid
+      path: "/pages/preparation/main?tid=" + this.tid
     };
   },
   onLoad(options) {

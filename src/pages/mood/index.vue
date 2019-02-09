@@ -27,7 +27,7 @@ export default {
   onShareAppMessage(res) {
     return {
       title: "快来看看我分享的心情吧",
-      path: "/page/mood?tid=" + this.tid
+      path: "/pages/mood/main?tid=" + this.tid
     }
   },
   methods: {

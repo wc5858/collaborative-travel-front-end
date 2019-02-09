@@ -23,7 +23,7 @@ export default {
   onShareAppMessage(res) {
     return {
         title: "我在经度" + this.latitude + "纬度" +this.longitude +"快乐,快来加入吧",
-        path: "/page/travel?tid=" + this.tid
+        path: "/pages/travel/main?tid=" + this.tid
       }
   },
   onLoad(options) {
