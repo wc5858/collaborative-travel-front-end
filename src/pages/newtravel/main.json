@@ -1,8 +1,5 @@
 {
-  "navigationBarTitleText": "发布出游",
+  "navigationBarTitleText": "创建出游计划",
   "usingComponents": {
-      "i-button": "/static/iview/button/index",
-      "i-input": "/static/iview/input/index",
-      "i-panel": "/static/iview/panel/index"
   }
 }
