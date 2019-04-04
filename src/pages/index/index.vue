@@ -236,8 +236,8 @@ ul {
   box-sizing: border-box;
 }
 .icon-status > div {
-  height: 20rpx;
-  width: 20rpx;
+  height:100%;
+  width:100%;
   background: #c0c015;
   border: 5rpx solid white;
   border-radius: 50%;

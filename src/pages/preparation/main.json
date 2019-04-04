@@ -1,12 +1,6 @@
 {
   "navigationBarTitleText": "准备详情",
   "usingComponents": {
-      "i-card": "/static/iview/card/index",
-      "i-icon": "/static/iview/icon/index",
-      "i-switch": "/static/iview/switch/index",
-      "i-cell": "/static/iview/cell/index",
-      "i-cell-group": "/static/iview/cell-group/index",
-      "i-button": "/static/iview/button/index",
-      "i-panel": "/static/iview/panel/index"
+      "i-icon": "/static/iview/icon/index"
   }
 }
