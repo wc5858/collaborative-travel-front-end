@@ -76,6 +76,16 @@ export default {
           date: dealDate(new Date()),
           num: 5,
           status: "召集中"
+        },
+        {
+          id: 1,
+          avatar: "/static/imgs/avatar.jpg",
+          title: "出游地点",
+          uname: "xxx",
+          dsc: "描述",
+          date: dealDate(new Date()),
+          num: 5,
+          status: "召集中"
         }
       ];
     },
