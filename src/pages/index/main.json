@@ -1,9 +1,6 @@
 {
-    "navigationBarTitleText": "协同出游",
+    "navigationBarTitleText": "发现出游",
     "usingComponents": {
-        "i-tabs": "/static/iview/tabs/index",
-        "i-tab": "/static/iview/tab/index",
-        "i-card": "/static/iview/card/index",
         "i-icon": "/static/iview/icon/index"
     }
 }

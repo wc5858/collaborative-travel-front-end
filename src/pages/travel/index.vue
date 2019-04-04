@@ -214,7 +214,7 @@ ul {
   width: 140rpx;
   border-radius: 100%;
   box-shadow: 0 10rpx 30rpx 6rpx #999;
-  background: #73116f;
+  background: #6a2c70;
   display: flex;
   align-items: center;
   justify-content: center;
